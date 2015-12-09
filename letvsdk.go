@@ -197,7 +197,6 @@ func (this *LetvCloudV1) generateSign(params map[interface{}]interface{}) string
 	}
 	sort.Strings(array)
 	keyStr := ""
-
 	for _, v := range array {
 
 		keyStr = keyStr + v + params[v].(string)
