@@ -1,6 +1,6 @@
 # letv-cloub-sdk
 
-乐视云sdk
+乐视云点播SDK
 
 视频上传（Web方式）
 
