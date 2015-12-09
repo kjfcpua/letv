@@ -51,7 +51,7 @@ func NewLetvCloudV1(unique, key string) *LetvCloudV1 {
  * 视频上传初始化
  * @param  string video_name 视频名称
  * @param  string client_ip  用户IP地址
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) VideoUploadInit(video_name string) []byte {
 	return this.videoUploadInit_(video_name, "", 0)
@@ -75,7 +75,7 @@ func (this *LetvCloudV1) SetApiVersion(apiVersion string) {
  * @param  string video_name 视频名称
  * @param  string client_ip  用户IP地址
  * @param  int file_size  文件大小，单位为字节
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) videoUploadInit_(video_name string, client_ip string, file_size int) []byte {
 	api := "video.upload.init"
@@ -96,7 +96,7 @@ func (this *LetvCloudV1) videoUploadInit_(video_name string, client_ip string, f
  * 视频上传 (web方式)
  * @param  string video_file 文件绝对路径
  * @param  string upload_url 视频上传地址，视频上传时提交地址
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) VideoUpload(video_file, upload_url string) []byte {
 	return this.doUploadFile(video_file, upload_url)
@@ -276,8 +276,7 @@ func (this *LetvCloudV1) videoUpdate_(video_id int, video_name, video_desc, tag 
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
  * @param  const status 视频状态：ALL表示全部；PLAY_OK表示可以正常播放；FAILED表示处理失败；WAIT表示正在处理过程中。默认值为ALL
- * @return String
- * @throws Exception
+ * @return []byte
  */
 func (this *LetvCloudV1) videoList(index, size, status int) []byte {
 	api := "video.list"
@@ -298,7 +297,7 @@ func (this *LetvCloudV1) videoList(index, size, status int) []byte {
  * 获取视频列表
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) videoList_(index, size int) []byte {
 	return this.videoList(index, size, -1)
@@ -308,7 +307,7 @@ func (this *LetvCloudV1) videoList_(index, size int) []byte {
  * 获取视频列表
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) videoList_1(index int) []byte {
 	return this.videoList(index, 0, -1)
@@ -318,7 +317,7 @@ func (this *LetvCloudV1) videoList_1(index int) []byte {
  * 获取视频列表
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) videoList_2() []byte {
 	return this.videoList(0, 0, -1)
@@ -327,7 +326,7 @@ func (this *LetvCloudV1) videoList_2() []byte {
 /**
  * 获取单个视频信息
  * @param videoid 视频id
- * @return string
+ * @return []byte
  */
 func (this *LetvCloudV1) videoGet(videoid int) []byte {
 	api := "video.get"
@@ -339,7 +338,7 @@ func (this *LetvCloudV1) videoGet(videoid int) []byte {
 /**
  * 删除视频
  * @param  int video_id 视频ID
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) videoDel(video_id int) []byte {
 	api := "video.del"
@@ -352,7 +351,6 @@ func (this *LetvCloudV1) videoDel(video_id int) []byte {
  * 批量删除视频
  * @param  string video_id_list 视频ID列表，使用符号-作为间隔符，每次最多操作50条记录
  * @return String
- * @throws Exception
  */
 func (this *LetvCloudV1) videoDelBatch(video_id_list string) []byte {
 	api := "video.del.batch"
@@ -365,7 +363,6 @@ func (this *LetvCloudV1) videoDelBatch(video_id_list string) []byte {
  * 视频暂停
  * @param  int video_id 视频ID
  * @return String
- * @throws Exception
  */
 func (this *LetvCloudV1) videoPause(video_id int) []byte {
 	api := "video.pause"
@@ -378,7 +375,6 @@ func (this *LetvCloudV1) videoPause(video_id int) []byte {
  * 视频恢复
  * @param  int video_id 视频ID
  * @return String
- * @throws Exception
  */
 func (this *LetvCloudV1) videoRestore(video_id int) []byte {
 	api := "video.restore"
@@ -391,7 +387,7 @@ func (this *LetvCloudV1) videoRestore(video_id int) []byte {
  * 获取视频截图
  * @param  int video_id 视频ID
  * @param  string size 截图尺寸，每种尺寸各有8张图。
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) imageGet(video_id int, size string) []byte {
 	api := "image.get"
@@ -408,7 +404,7 @@ func (this *LetvCloudV1) imageGet(video_id int, size string) []byte {
  * @param  int video_id 视频ID
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoHour(date string, hour, video_id, index, size int) []byte {
 	api := "data.video.hour"
@@ -435,7 +431,7 @@ func (this *LetvCloudV1) dataVideoHour(date string, hour, video_id, index, size 
  * @param  int hour 小时，0-23之间
  * @param  int video_id 视频ID
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoHour_(date string, hour, video_id, index int) []byte {
 	return this.dataVideoHour(date, hour, video_id, index, 0)
@@ -447,7 +443,7 @@ func (this *LetvCloudV1) dataVideoHour_(date string, hour, video_id, index int) 
  * @param  int hour 小时，0-23之间
  * @param  int video_id 视频ID
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoHour_1(date string, hour, video_id int) []byte {
 	return this.dataVideoHour(date, hour, video_id, 0, 0)
@@ -459,7 +455,7 @@ func (this *LetvCloudV1) dataVideoHour_1(date string, hour, video_id int) []byte
  * @param  int hour 小时，0-23之间
  * @param  int video_id 视频ID
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoHour_2(date string, hour int) []byte {
 	return this.dataVideoHour(date, hour, 0, 0, 0)
@@ -471,7 +467,7 @@ func (this *LetvCloudV1) dataVideoHour_2(date string, hour int) []byte {
  * @param  int hour 小时，0-23之间
  * @param  int video_id 视频ID
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoHour_3(date string) []byte {
 	return this.dataVideoHour(date, -1, 0, 0, 0)
@@ -484,7 +480,7 @@ func (this *LetvCloudV1) dataVideoHour_3(date string) []byte {
  * @param  int video_id 视频ID，不输入该参数将返回所有视频的数据
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoDate(start_date, end_date string, video_id, index, size int) []byte {
 	api := "data.video.date"
@@ -509,7 +505,7 @@ func (this *LetvCloudV1) dataVideoDate(start_date, end_date string, video_id, in
  * @param  string end_date 结束日期，格式为：yyyy-mm-dd
  * @param  int video_id 视频ID，不输入该参数将返回所有视频的数据
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoDate_(start_date, end_date string, video_id, index int) []byte {
 	return this.dataVideoDate(start_date, end_date, video_id, index, 0)
@@ -521,7 +517,7 @@ func (this *LetvCloudV1) dataVideoDate_(start_date, end_date string, video_id, i
  * @param  string end_date 结束日期，格式为：yyyy-mm-dd
  * @param  int video_id 视频ID，不输入该参数将返回所有视频的数据
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoDate_1(start_date, end_date string, video_id int) []byte {
 	return this.dataVideoDate(start_date, end_date, video_id, 0, 0)
@@ -533,7 +529,7 @@ func (this *LetvCloudV1) dataVideoDate_1(start_date, end_date string, video_id i
  * @param  string end_date 结束日期，格式为：yyyy-mm-dd
  * @param  int video_id 视频ID，不输入该参数将返回所有视频的数据
  * @param  int index 开始页索引，默认值为1
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataVideoDate_2(start_date, end_date string) []byte {
 	return this.dataVideoDate(start_date, end_date, 0, 0, 0)
@@ -545,7 +541,7 @@ func (this *LetvCloudV1) dataVideoDate_2(start_date, end_date string) []byte {
  * @param  string end_date 结束日期，格式为：yyyy-mm-dd
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataTotalDate(start_date, end_date string, index, size int) []byte {
 	api := "data.total.date"
@@ -567,7 +563,7 @@ func (this *LetvCloudV1) dataTotalDate(start_date, end_date string, index, size 
  * @param  string end_date 结束日期，格式为：yyyy-mm-dd
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataTotalDate_(start_date, end_date string, index int) []byte {
 	return this.dataTotalDate(start_date, end_date, index, 0)
@@ -579,7 +575,7 @@ func (this *LetvCloudV1) dataTotalDate_(start_date, end_date string, index int) 
  * @param  string end_date 结束日期，格式为：yyyy-mm-dd
  * @param  int index 开始页索引，默认值为1
  * @param  int size 分页大小，默认值为10，最大值为100
- * @return String
+ * @return []byte
  */
 func (this *LetvCloudV1) dataTotalDate_1(start_date, end_date string) []byte {
 	return this.dataTotalDate(start_date, end_date, 0, 0)
